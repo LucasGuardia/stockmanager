@@ -1,6 +1,6 @@
 const productsModel = require('../models/productsModel')
 
-const getAll = async (request, response) => {
+const getAll = async (_request, response) => {
   const products = await productsModel.getAll()
   return response.status(200).json(products)
 }
