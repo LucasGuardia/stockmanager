@@ -6,10 +6,24 @@ class Products {
     return products
   }
 
+  async getById(id) {
+    const product = await sql`SELECT * FROM produtos WHERE id = ${id}`
+    return product
+  }
+
   async register(product) {
     await sql`INSERT INTO produtos (name, description, price, quantity, category) 
     VALUES (${product.name}, ${product.description}, ${product.price}, ${product.quantity}, ${product.category})`
   }
+
+  async delete(id) {
+    await sql`DELETE FROM produtos WHERE id = ${id}`
+  }
+
+  // async update(product) {
+  //   await sql`UPDATE produtos SET name = ${product.name}, description = ${product.description}, price = ${product.price}, quantity = ${product.quantity}, category = ${product.category} WHERE id = ${product.id}`
+  // }
+
 }
 
 module.exports = new Products()

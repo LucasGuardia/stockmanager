@@ -2,6 +2,7 @@ const Products = require("../models/productsModel")
 const productsModel = Products
 
 class ProductsController {
+
   async getAll(_req, res) {
     try {
       const products = await productsModel.getAll()
@@ -11,7 +12,28 @@ class ProductsController {
     }
   }
 
+  async getById(req, res) {
+    const { id } = req.query
+
+    if (!id) {
+      return res.status(400).json({ message: 'Invalid parameters' });
+    }
+
+    try {
+      const product = await productsModel.getById(id)
+      return res.status(200).json(product)
+    } catch (error) {
+      return res.status(500).json({ error: 'Failed to search product' })
+    }
+  }
+
   async register(req, res) {
+    const { name, price, quantity } = req.body
+
+    if (!name || !price || !quantity) {
+      return res.status(422).json({ message: 'Invalid fields' });
+    }
+
     try {
       await productsModel.register(req.body)
       return res.status(201).json({ message: 'Product registered' })
@@ -19,6 +41,22 @@ class ProductsController {
       return res.status(500).json({ error: 'Failed to register product' })
     }
   }
+
+  async delete(req, res) {
+    const { id } = req.query
+
+    if (!id) {
+      return res.status(400).json({ message: 'Invalid parameters' });
+    }
+
+    try {
+      await productsModel.delete(id)
+      return res.status(204)
+    } catch (error) {
+      return res.status(500).json({ error: 'Failed to delete product' })
+    }
+  }
+
 }
 
 module.exports = new ProductsController()
