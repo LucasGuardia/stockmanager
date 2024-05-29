@@ -23,7 +23,6 @@ class Products {
   }
 
   async update(id, product) {
-    console.log(product)
     await sql`UPDATE produtos SET name = ${product.name}, description = ${product.description}, price = ${product.price}, quantity = ${product.quantity}, category = ${product.category} WHERE id = ${id}`
   }
 
