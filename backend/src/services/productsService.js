@@ -3,59 +3,23 @@ const productsModel = Products
 
 class ProductsService {
   async getAll() {
-    try {
-      return await productsModel.getAll()
-    } catch (error) {
-      throw new Error('Failed to search products');
-    }
+    return await productsModel.getAll()
   }
 
   async getById(id) {
-    if (!id) {
-      throw new Error('Invalid parameters')
-    }
-    try {
-      return await productsModel.getById(id)
-    } catch (error) {
-      throw new Error('Failed to search product')
-    }
+    return await productsModel.getById(id)
   }
 
   async register(request) {
-    const { name, price, quantity } = request
-
-    if (!name || !price || !quantity) {
-      throw new Error('Invalid parameters')
-    }
-    try {
-      return await productsModel.register(request)
-    } catch (error) {
-      throw new Error('Failed to register product')
-    }
+    return await productsModel.register(request)
   }
 
   async delete(id) {
-    if (!id) {
-      throw new Error('Invalid parameters')
-    }
-    try {
-      return await productsModel.delete(id)
-    } catch (error) {
-      throw new Error('Failed to delete product')
-    }
+    return await productsModel.delete(id)
   }
 
   async update(id, request) {
-    const { name, price, quantity } = request
-
-    if (!id || !name || !price || !quantity) {
-      throw new Error('Invalid parameters')
-    }
-    try {
-      return await productsModel.update(id, request)
-    } catch (error) {
-      throw new Error('Failed to update product')
-    }
+    return await productsModel.update(id, request)
   }
 }
 
